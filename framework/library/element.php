@@ -116,12 +116,14 @@
 	class Head extends Element {
 		public function __construct() {
 			$this->setType('head');
+			$this->setContent( HtmlDefaults::defaultHead() );
 		}
 	}
 
 	class Body extends Element {
 		public function __construct() {
 			$this->setType('body');
+			$this->setContent( HtmlDefaults::defaultBody() );
 		}
 	}
 

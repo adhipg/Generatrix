@@ -24,7 +24,8 @@
 		if(isset($_SERVER['argc']) && ($_SERVER['argc'] > 1)) {
 			display("This page does not exist");
 		} else {
-			echo "<div style='width: 600px; margin: 150px auto; text-align: center; background-color: #F7F7F7; border: 10px solid #EEEEEE; padding: 40px 0px; font-family: Georgia; Arial, sans-serif;'>This page does not exist</div>";
+			header("HTTP/1.1 404 Not Found"); 
+			echo "<div style='width: 600px; margin: 150px auto; text-align: center; background-color: #F7F7F7; border: 10px solid #EEEEEE; padding: 40px 0px; font-family: Georgia; Arial, sans-serif;'>This page does not exist.</div>";
 		}
 	}
 
@@ -58,11 +59,20 @@
 
 	// Adds a DTD to the page by default
 	function addDTD($type = null) {
-		switch($type) {
-			case 'strict':
-				echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n";
-			default:
-				echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n";
+		// Ideally, I should have just added the option to just change the 'dtd' variable 
+		// in the config.json to do HTML 5. But, looking forward we would want to remove 
+		// both options and make this the standard. Also, the HTML_5 is used at other
+		// places for JS features, modernizr etc.
+		if ( HTML_5 == false ) {
+			switch($type) {
+				case 'strict':
+					echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n";
+				default:
+					echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n";
+			}
+		}
+		else {
+			echo "<!doctype html>\n";
 		}
 	}
 

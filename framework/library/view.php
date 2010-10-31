@@ -229,10 +229,25 @@
 			}
 		}
 
+
+		//This function will add all the files to make HTML-5 work on Generatrix.
+		private function addHtml5features() {
+			// Only if the setup is marked as HTML 5.
+			if ( HTML_5 == false ) {
+				return;
+			}
+
+			$content = '';
+			$content .= '<script type="text/javascript" src="' . chref('/public/javascript/libs/modernizr-1.6.min.js') . '"></script>';
+
+			$this->getHead()->appendContent($content);
+		}
+
 		// Add the libraries
 		private function addLibraries() {
 			$this->addGeneratedCss();
 			$this->addGoogleAjaxLibraries();
+			$this->addHtml5features();
 		}
 
 		// Public function which adds stuff to the <head> from the view

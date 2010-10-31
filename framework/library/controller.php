@@ -184,7 +184,9 @@
 		}
 
 		public function isHtml($value = true) {
+			// The same function is being used as a getter and setter at places.
 			$this->is_html = $value;
+			return $value;
 		}
 	}
 
